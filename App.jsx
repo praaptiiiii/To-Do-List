@@ -16,6 +16,15 @@ function App() {
     });
     setItem("");
   }
+
+  function deleteItem(id) {
+    createList((prevItems) => {
+      return prevItems.filter((item, index) => {
+        return index !== id;
+      });
+    });
+  }
+
   return (
     <div className="container">
       <div className="heading">
@@ -29,8 +38,13 @@ function App() {
       </div>
       <div>
         <ul>
-          {list.map((listItem) => (
-            <ToDoItem text={listItem} />
+          {list.map((listItem, index) => (
+            <ToDoItem
+              text={listItem}
+              onChecked={deleteItem}
+              key={index}
+              id={index}
+            />
           ))}
         </ul>
       </div>
